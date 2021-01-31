@@ -1,10 +1,11 @@
 const colors = {
-  background: '#231E31',
-  surface: '#302A44',
-  onBackground: '#fff',
-  onBackgroundAlternative: '#cdcdcd',
-  primary: '#2D2C3C',
-  secondary: '#65D9E4',
+  background: '#2d2c3c',
+  surface: '#565566',
+  onBackground: '#ffffff',
+  text: '#ffffff',
+  onBackgroundAlternative: '#efefef',
+  primary: '#ffffff',
+  secondary: '#65d9e4',
 };
 
 export default colors;

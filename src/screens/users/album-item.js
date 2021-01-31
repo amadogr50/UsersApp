@@ -42,7 +42,9 @@ function AlbumItem(props: Props) {
       <View style={styles.iconContainer}>
         <Icon name="image" size={48} />
       </View>
-      <Body style={styles.title}>{props.album.title}</Body>
+      <Body style={styles.title} numberOfLines={2} ellipsizeMode="tail">
+        {props.album.title}
+      </Body>
     </TouchableOpacity>
   );
 }

@@ -6,7 +6,10 @@ import {UserDetail, UsersList} from '../screens';
 const Stack = createNativeStackNavigator();
 
 const UsersStack = () => (
-  <Stack.Navigator>
+  <Stack.Navigator
+    screenOptions={{
+      headerShown: false,
+    }}>
     <Stack.Screen name={ROUTES.USERS_LISTS} component={UsersList} />
     <Stack.Screen name={ROUTES.USER_DETAIL} component={UserDetail} />
   </Stack.Navigator>

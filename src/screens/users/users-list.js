@@ -1,14 +1,20 @@
 import React, {useCallback, useEffect} from 'react';
-import {FlatList, Text, View} from 'react-native';
+import {FlatList, StyleSheet, Text, View} from 'react-native';
 import {useDispatch, useSelector} from 'react-redux';
 import {getUsersRequest} from '../../redux/actions/users';
 import UserItem from './user-item';
-import {ROUTES} from '../../navigation';
 import Separator from '../../components/common/separator';
 import {Header} from '../../components/layout';
 import HeaderMenu from '../../components/layout/header-menu';
 import HeaderTitle from '../../components/layout/header-title';
 import {getUsers} from '../../redux/selectors';
+import ROUTES from '../../navigation/routes';
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
+});
 
 function UsersList({navigation}) {
   const dispatch = useDispatch();
@@ -29,22 +35,33 @@ function UsersList({navigation}) {
   );
 
   const renderItem = useCallback(
-    ({item: user}) => <UserItem user={user} onPress={onPress} />,
+    ({item: user}) => (
+      <UserItem
+        user={user}
+        onPress={() => {
+          onPress(user);
+        }}
+      />
+    ),
     [onPress],
   );
 
   return users.length ? (
-    <View>
-      <Header>
-        <HeaderMenu />
-        <HeaderTitle title="Users" />
-      </Header>
-      <FlatList
-        data={users}
-        renderItem={renderItem}
-        ItemSeparatorComponent={Separator}
-        keyExtractor={keyExtractor}
+    <View style={styles.container}>
+      <Header
+        headerLeft={<HeaderMenu />}
+        headerCenter={<HeaderTitle title="Users" />}
       />
+      <View style={styles.container}>
+        <FlatList
+          data={users}
+          renderItem={renderItem}
+          ItemSeparatorComponent={Separator}
+          ListFooterComponent={Separator}
+          keyExtractor={keyExtractor}
+          showsVerticalScrollIndicator={false}
+        />
+      </View>
     </View>
   ) : (
     <Text>Loading</Text>

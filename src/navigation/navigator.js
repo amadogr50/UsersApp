@@ -6,9 +6,9 @@ import colors from '../theme/colors';
 const Navigator = () => (
   <NavigationContainer
     theme={{
+      dark: true,
       colors: {
-        background: colors.background,
-        text: colors.onBackground,
+        ...colors,
       },
     }}>
     <DrawerNavigator />

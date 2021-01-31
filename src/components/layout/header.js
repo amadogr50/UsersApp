@@ -10,10 +10,27 @@ const styles = StyleSheet.create({
     flexWrap: 'nowrap',
     padding: dimensions.s,
   },
+  headerLeft: {},
+  headerCenter: {
+    flex: 1,
+    marginHorizontal: dimensions.s,
+  },
 });
 
-function Header({children}) {
-  return <View style={styles.container}>{children}</View>;
+type Props = {
+  headerLeft?: React.Node,
+  headerCenter?: React.Node,
+};
+
+function Header(props: Props) {
+  const {headerLeft, headerCenter} = props;
+
+  return (
+    <View style={styles.container}>
+      <View style={styles.headerLeft}>{headerLeft}</View>
+      <View style={styles.headerCenter}>{headerCenter}</View>
+    </View>
+  );
 }
 
 export default Header;

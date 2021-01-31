@@ -1,0 +1,8 @@
+const ROUTES = {
+  DASHBOARD: 'DASHBOARD',
+  USERS: 'USERS',
+  USERS_LISTS: 'USERS_LISTS',
+  USER_DETAIL: 'USER_DETAIL',
+};
+
+export default ROUTES;

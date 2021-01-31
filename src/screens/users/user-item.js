@@ -1,15 +1,9 @@
 import React from 'react';
-import {
-  View,
-  StyleSheet,
-  Text,
-  Pressable,
-  TouchableOpacity,
-} from 'react-native';
+import {StyleSheet, TouchableOpacity, View} from 'react-native';
 import type {User} from '../../types/users';
 import dimensions from '../../theme/dimensions';
 import colors from '../../theme/colors';
-import {Label, Quote, Subtitle} from '../../components/typography';
+import {Label, Subtitle} from '../../components/typography';
 import {Icon} from '../../components/common';
 
 type Props = {

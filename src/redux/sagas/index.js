@@ -1,5 +1,6 @@
 import {all} from 'redux-saga/effects';
+import usersWatcher from './users';
 
 export default function* () {
-  yield all([]);
+  yield all([usersWatcher()]);
 }

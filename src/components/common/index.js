@@ -1,3 +1,5 @@
 import Icon from './icon';
+import HorizontalSeparator from './horizontal-separator';
+import Separator from './separator';
 
-export {Icon};
+export {Icon, HorizontalSeparator, Separator};

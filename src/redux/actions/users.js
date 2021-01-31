@@ -4,6 +4,12 @@ const USERS = {
   ERROR: 'USERS.ERROR',
 };
 
+const USER_BY_ID = {
+  REQUEST: 'USER_BY_ID.REQUEST',
+  SUCCESS: 'USER_BY_ID.SUCCESS',
+  ERROR: 'USER_BY_ID.ERROR',
+};
+
 const getUsersRequest = () => ({
   type: USERS.REQUEST,
 });
@@ -18,4 +24,28 @@ const getUsersError = (error) => ({
   error,
 });
 
-export {USERS, getUsersRequest, getUsersSuccess, getUsersError};
+const getUserByIdRequest = (id) => ({
+  type: USER_BY_ID.REQUEST,
+  id,
+});
+
+const getUserByIdSuccess = (user) => ({
+  type: USER_BY_ID.SUCCESS,
+  user,
+});
+
+const getUserByIdError = (error) => ({
+  type: USER_BY_ID.ERROR,
+  error,
+});
+
+export {
+  USERS,
+  getUsersRequest,
+  getUsersSuccess,
+  getUsersError,
+  USER_BY_ID,
+  getUserByIdRequest,
+  getUserByIdSuccess,
+  getUserByIdError,
+};

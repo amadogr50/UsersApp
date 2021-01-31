@@ -1,14 +1,28 @@
-import {USERS} from '../actions/users';
+import {USER_BY_ID, USERS} from '../actions/users';
 
-const initialState = {
-  users: [],
-};
+const initialState = {};
 
 const usersReducer = (state = initialState, action) => {
-  if (action.type === USERS.SUCCESS) {
-    return {...state, users: [...action.users]};
+  switch (action.type) {
+    case USERS.SUCCESS:
+      return {
+        ...state,
+        ...action.users.reduce((acc, cur, i) => {
+          acc[cur.id] = {
+            ...acc[cur.id],
+            ...cur,
+          };
+          return acc;
+        }, {}),
+      };
+    case USER_BY_ID.SUCCESS:
+      return {
+        ...state,
+        [action.user.id]: action.user,
+      };
+    default:
+      return state;
   }
-  return state;
 };
 
 export default usersReducer;

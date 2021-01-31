@@ -8,6 +8,7 @@ import Separator from '../../components/common/separator';
 import {Header} from '../../components/layout';
 import HeaderMenu from '../../components/layout/header-menu';
 import HeaderTitle from '../../components/layout/header-title';
+import {getUsers} from '../../redux/selectors';
 
 function UsersList({navigation}) {
   const dispatch = useDispatch();
@@ -16,7 +17,7 @@ function UsersList({navigation}) {
     dispatch(getUsersRequest());
   }, [dispatch]);
 
-  const users = useSelector((state) => state.users.users);
+  const users = useSelector(getUsers);
 
   const keyExtractor = useCallback((user) => user.id, []);
 

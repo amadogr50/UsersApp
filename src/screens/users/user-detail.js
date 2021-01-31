@@ -1,8 +1,8 @@
 import React, {useEffect} from 'react';
-import {FlatList, StyleSheet, View} from 'react-native';
+import {FlatList, ScrollView, StyleSheet, View} from 'react-native';
 import {Header} from '../../components/layout';
 import HeaderBack from '../../components/layout/header-back';
-import {Body, Subtitle, Title} from '../../components/typography';
+import {Body, Label, Subtitle, Title} from '../../components/typography';
 import UserDetailItem from './user-detail-item';
 import dimensions from '../../theme/dimensions';
 import {useDispatch, useSelector} from 'react-redux';
@@ -13,6 +13,8 @@ import {
 } from '../../redux/selectors';
 import {getUserByIdRequest} from '../../redux/actions/users';
 import AlbumItem from './album-item';
+import MapView, {PROVIDER_GOOGLE} from 'react-native-maps';
+import {HorizontalSeparator, Icon} from '../../components/common';
 
 const styles = StyleSheet.create({
   container: {
@@ -45,10 +47,11 @@ function UserDetail({navigation, route}) {
   }, [dispatch, id]);
 
   return (
-    <View>
-      <Header>
-        <HeaderBack />
-      </Header>
+    <ScrollView
+      style={{
+        marginBottom: dimensions.s,
+      }}>
+      <Header headerLeft={<HeaderBack />} />
       {user ? (
         <>
           <Title style={[styles.container, styles.titleContainer]}>
@@ -84,6 +87,39 @@ function UserDetail({navigation, route}) {
               title={`${user?.address?.street} ${user?.address?.suite} ${user?.address?.city}`}
               icon={'location-on'}
               onPress={() => {}}
+              bottom={
+                <View>
+                  <View
+                    style={{
+                      height: 180,
+                      marginBottom: dimensions.xs,
+                    }}>
+                    <MapView
+                      provider={PROVIDER_GOOGLE}
+                      style={StyleSheet.absoluteFillObject}
+                      pitchEnabled={false}
+                      rotateEnabled={false}
+                      scrollEnabled={false}
+                      zoomEnabled={false}
+                      region={{
+                        latitude: parseFloat(user?.address?.geo.lat),
+                        longitude: parseFloat(user?.address?.geo.lng),
+                        latitudeDelta: 3,
+                        longitudeDelta: 3,
+                      }}
+                      showsUserLocation>
+                      <MapView.Marker
+                        coordinate={{
+                          latitude: parseFloat(user?.address?.geo.lat),
+                          longitude: parseFloat(user?.address?.geo.lng),
+                        }}>
+                        <Icon name="location-pin" color={'red'} />
+                      </MapView.Marker>
+                    </MapView>
+                  </View>
+                  <Label>{`L${user?.address?.geo.lat} / L${user?.address?.geo.lng}`}</Label>
+                </View>
+              }
             />
           </View>
           {albums.length > 0 && (
@@ -94,8 +130,9 @@ function UserDetail({navigation, route}) {
               <FlatList
                 horizontal
                 data={albums}
-                contentContainerStyle={styles.container}
+                ListHeaderComponent={HorizontalSeparator}
                 renderItem={({item: album}) => <AlbumItem album={album} />}
+                showsHorizontalScrollIndicator={false}
               />
             </>
           )}
@@ -103,7 +140,7 @@ function UserDetail({navigation, route}) {
       ) : (
         <Body>Loading</Body>
       )}
-    </View>
+    </ScrollView>
   );
 }
 
